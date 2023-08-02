@@ -30,31 +30,31 @@ import com.github.kklisura.cdt.definition.builder.support.java.builder.JavaClass
 import com.github.kklisura.cdt.definition.builder.support.java.builder.JavaEnumBuilder;
 import com.github.kklisura.cdt.definition.builder.support.java.builder.support.CombinedBuilders;
 import com.github.kklisura.cdt.definition.builder.support.protocol.builder.support.DomainTypeResolver;
-import com.github.kklisura.cdt.protocol.definition.types.Domain;
-import com.github.kklisura.cdt.protocol.definition.types.Type;
-import com.github.kklisura.cdt.protocol.definition.types.type.ArrayType;
-import com.github.kklisura.cdt.protocol.definition.types.type.EnumType;
-import com.github.kklisura.cdt.protocol.definition.types.type.NumberType;
-import com.github.kklisura.cdt.protocol.definition.types.type.StringType;
-import com.github.kklisura.cdt.protocol.definition.types.type.object.ObjectType;
-import com.github.kklisura.cdt.protocol.definition.types.type.object.Property;
-import com.github.kklisura.cdt.protocol.definition.types.type.object.properties.AnyProperty;
-import com.github.kklisura.cdt.protocol.definition.types.type.object.properties.ArrayProperty;
-import com.github.kklisura.cdt.protocol.definition.types.type.object.properties.BooleanProperty;
-import com.github.kklisura.cdt.protocol.definition.types.type.object.properties.EnumProperty;
-import com.github.kklisura.cdt.protocol.definition.types.type.object.properties.IntegerProperty;
-import com.github.kklisura.cdt.protocol.definition.types.type.object.properties.NumberProperty;
-import com.github.kklisura.cdt.protocol.definition.types.type.object.properties.ObjectProperty;
-import com.github.kklisura.cdt.protocol.definition.types.type.object.properties.RefProperty;
-import com.github.kklisura.cdt.protocol.definition.types.type.object.properties.StringProperty;
-import com.github.kklisura.cdt.protocol.definition.types.type.object.properties.array.ArrayItem;
-import com.github.kklisura.cdt.protocol.definition.types.type.object.properties.array.items.AnyArrayItem;
-import com.github.kklisura.cdt.protocol.definition.types.type.object.properties.array.items.EnumArrayItem;
-import com.github.kklisura.cdt.protocol.definition.types.type.object.properties.array.items.IntegerArrayItem;
-import com.github.kklisura.cdt.protocol.definition.types.type.object.properties.array.items.NumberArrayItem;
-import com.github.kklisura.cdt.protocol.definition.types.type.object.properties.array.items.ObjectArrayItem;
-import com.github.kklisura.cdt.protocol.definition.types.type.object.properties.array.items.RefArrayItem;
-import com.github.kklisura.cdt.protocol.definition.types.type.object.properties.array.items.StringArrayItem;
+import com.github.kklisura.cdt.protocol.v2023.definition.types.Domain;
+import com.github.kklisura.cdt.protocol.v2023.definition.types.Type;
+import com.github.kklisura.cdt.protocol.v2023.definition.types.type.ArrayType;
+import com.github.kklisura.cdt.protocol.v2023.definition.types.type.EnumType;
+import com.github.kklisura.cdt.protocol.v2023.definition.types.type.NumberType;
+import com.github.kklisura.cdt.protocol.v2023.definition.types.type.StringType;
+import com.github.kklisura.cdt.protocol.v2023.definition.types.type.object.ObjectType;
+import com.github.kklisura.cdt.protocol.v2023.definition.types.type.object.Property;
+import com.github.kklisura.cdt.protocol.v2023.definition.types.type.object.properties.AnyProperty;
+import com.github.kklisura.cdt.protocol.v2023.definition.types.type.object.properties.ArrayProperty;
+import com.github.kklisura.cdt.protocol.v2023.definition.types.type.object.properties.BooleanProperty;
+import com.github.kklisura.cdt.protocol.v2023.definition.types.type.object.properties.EnumProperty;
+import com.github.kklisura.cdt.protocol.v2023.definition.types.type.object.properties.IntegerProperty;
+import com.github.kklisura.cdt.protocol.v2023.definition.types.type.object.properties.NumberProperty;
+import com.github.kklisura.cdt.protocol.v2023.definition.types.type.object.properties.ObjectProperty;
+import com.github.kklisura.cdt.protocol.v2023.definition.types.type.object.properties.RefProperty;
+import com.github.kklisura.cdt.protocol.v2023.definition.types.type.object.properties.StringProperty;
+import com.github.kklisura.cdt.protocol.v2023.definition.types.type.object.properties.array.ArrayItem;
+import com.github.kklisura.cdt.protocol.v2023.definition.types.type.object.properties.array.items.AnyArrayItem;
+import com.github.kklisura.cdt.protocol.v2023.definition.types.type.object.properties.array.items.EnumArrayItem;
+import com.github.kklisura.cdt.protocol.v2023.definition.types.type.object.properties.array.items.IntegerArrayItem;
+import com.github.kklisura.cdt.protocol.v2023.definition.types.type.object.properties.array.items.NumberArrayItem;
+import com.github.kklisura.cdt.protocol.v2023.definition.types.type.object.properties.array.items.ObjectArrayItem;
+import com.github.kklisura.cdt.protocol.v2023.definition.types.type.object.properties.array.items.RefArrayItem;
+import com.github.kklisura.cdt.protocol.v2023.definition.types.type.object.properties.array.items.StringArrayItem;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
@@ -656,7 +656,7 @@ public class TypesBuilderTest extends EasyMockSupport {
 
     ArrayType resolvedType = new ArrayType();
     resolvedType.setItems(
-        new com.github.kklisura.cdt.protocol.definition.types.type.array.items.StringArrayItem());
+        new com.github.kklisura.cdt.protocol.v2023.definition.types.type.array.items.StringArrayItem());
 
     expect(resolver.resolve("TestPackage", "RefArray")).andReturn(resolvedType);
 
@@ -947,7 +947,7 @@ public class TypesBuilderTest extends EasyMockSupport {
 
     ArrayType resolvedType = new ArrayType();
     resolvedType.setItems(
-        new com.github.kklisura.cdt.protocol.definition.types.type.array.items.NumberArrayItem());
+        new com.github.kklisura.cdt.protocol.v2023.definition.types.type.array.items.NumberArrayItem());
 
     expect(resolver.resolve("domain-name", "RefArray1")).andReturn(resolvedType);
 

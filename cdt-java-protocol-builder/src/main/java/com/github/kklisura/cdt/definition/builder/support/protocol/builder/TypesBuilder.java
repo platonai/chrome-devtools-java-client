@@ -27,17 +27,25 @@ import com.github.kklisura.cdt.definition.builder.support.java.builder.support.C
 import com.github.kklisura.cdt.definition.builder.support.protocol.builder.support.DomainTypeResolver;
 import com.github.kklisura.cdt.definition.builder.support.protocol.builder.support.PropertyHandlerResult;
 import com.github.kklisura.cdt.definition.builder.support.protocol.builder.support.TypeBuildRequest;
-import com.github.kklisura.cdt.protocol.definition.types.Domain;
-import com.github.kklisura.cdt.protocol.definition.types.Type;
-import com.github.kklisura.cdt.protocol.definition.types.type.*;
-import com.github.kklisura.cdt.protocol.definition.types.type.object.ObjectType;
-import com.github.kklisura.cdt.protocol.definition.types.type.object.Property;
-import com.github.kklisura.cdt.protocol.definition.types.type.object.properties.*;
-import com.github.kklisura.cdt.protocol.definition.types.type.object.properties.array.ArrayItem;
-import com.github.kklisura.cdt.protocol.definition.types.type.object.properties.array.items.*;
+import com.github.kklisura.cdt.protocol.v2023.definition.types.Domain;
+import com.github.kklisura.cdt.protocol.v2023.definition.types.Type;
+import com.github.kklisura.cdt.protocol.v2023.definition.types.type.*;
+import com.github.kklisura.cdt.protocol.v2023.definition.types.type.object.ObjectType;
+import com.github.kklisura.cdt.protocol.v2023.definition.types.type.object.Property;
+import com.github.kklisura.cdt.protocol.v2023.definition.types.type.array.items.IntegerArrayItem;
+import com.github.kklisura.cdt.protocol.v2023.definition.types.type.array.items.NumberArrayItem;
+import com.github.kklisura.cdt.protocol.v2023.definition.types.type.array.items.RefArrayItem;
+import com.github.kklisura.cdt.protocol.v2023.definition.types.type.array.items.StringArrayItem;
+import com.github.kklisura.cdt.protocol.v2023.definition.types.type.object.properties.*;
+import com.github.kklisura.cdt.protocol.v2023.definition.types.type.object.properties.array.ArrayItem;
+
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+
+import com.github.kklisura.cdt.protocol.v2023.definition.types.type.object.properties.array.items.AnyArrayItem;
+import com.github.kklisura.cdt.protocol.v2023.definition.types.type.object.properties.array.items.EnumArrayItem;
+import com.github.kklisura.cdt.protocol.v2023.definition.types.type.object.properties.array.items.ObjectArrayItem;
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.collections4.CollectionUtils;
@@ -104,28 +112,28 @@ public class TypesBuilder {
   static {
     registerArrayItem(ObjectArrayItem.class, "Object");
     registerArrayItem(AnyArrayItem.class, "Object");
-    registerArrayItem(StringArrayItem.class, "String");
-    registerArrayItem(IntegerArrayItem.class, "Integer");
-    registerArrayItem(NumberArrayItem.class, "Double");
+    registerArrayItem(com.github.kklisura.cdt.protocol.v2023.definition.types.type.object.properties.array.items.StringArrayItem.class, "String");
+    registerArrayItem(com.github.kklisura.cdt.protocol.v2023.definition.types.type.object.properties.array.items.IntegerArrayItem.class, "Integer");
+    registerArrayItem(com.github.kklisura.cdt.protocol.v2023.definition.types.type.object.properties.array.items.NumberArrayItem.class, "Double");
   }
 
   // Register handlers for some array items types. These types are special and require special
   // handling.
   {
     registerArrayItem(EnumArrayItem.class, this::addEnumArrayItem);
-    registerArrayItem(RefArrayItem.class, this::addRefArrayItem);
+    registerArrayItem(com.github.kklisura.cdt.protocol.v2023.definition.types.type.object.properties.array.items.RefArrayItem.class, this::addRefArrayItem);
   }
 
   // Registers array item types to java types.
   static {
     registerTypeArrayItem(
-        com.github.kklisura.cdt.protocol.definition.types.type.array.items.StringArrayItem.class,
+        StringArrayItem.class,
         "String");
     registerTypeArrayItem(
-        com.github.kklisura.cdt.protocol.definition.types.type.array.items.NumberArrayItem.class,
+        NumberArrayItem.class,
         "Double");
     registerTypeArrayItem(
-        com.github.kklisura.cdt.protocol.definition.types.type.array.items.IntegerArrayItem.class,
+        IntegerArrayItem.class,
         "Integer");
   }
 
@@ -413,8 +421,8 @@ public class TypesBuilder {
     return result;
   }
 
-  private ArrayItemHandlerResult addRefArrayItem(ArrayItemBuildRequest<RefArrayItem> request) {
-    final RefArrayItem property = request.getProperty();
+  private ArrayItemHandlerResult addRefArrayItem(ArrayItemBuildRequest<com.github.kklisura.cdt.protocol.v2023.definition.types.type.object.properties.array.items.RefArrayItem> request) {
+    final com.github.kklisura.cdt.protocol.v2023.definition.types.type.object.properties.array.items.RefArrayItem property = request.getProperty();
 
     String objectName =
         addRefImportStatement(
@@ -483,9 +491,9 @@ public class TypesBuilder {
       String arrayItemType = null;
 
       if (isRefArrayItemType(arrayType.getItems())) {
-        com.github.kklisura.cdt.protocol.definition.types.type.array.items.RefArrayItem
+        RefArrayItem
             refArrayItem =
-                (com.github.kklisura.cdt.protocol.definition.types.type.array.items.RefArrayItem)
+                (RefArrayItem)
                     arrayType.getItems();
 
         arrayItemType =
@@ -552,13 +560,13 @@ public class TypesBuilder {
   }
 
   protected static boolean isRefArrayItemType(
-      com.github.kklisura.cdt.protocol.definition.types.type.array.ArrayItem arrayItem) {
+      com.github.kklisura.cdt.protocol.v2023.definition.types.type.array.ArrayItem arrayItem) {
     return arrayItem
-        instanceof com.github.kklisura.cdt.protocol.definition.types.type.array.items.RefArrayItem;
+        instanceof RefArrayItem;
   }
 
   protected static String getArrayItemJavaType(
-      com.github.kklisura.cdt.protocol.definition.types.type.array.ArrayItem arrayItem) {
+      com.github.kklisura.cdt.protocol.v2023.definition.types.type.array.ArrayItem arrayItem) {
     return ARRAY_TYPE_ITEM_TYPE_TO_JAVA_TYPE_MAP.get(arrayItem.getClass());
   }
 
@@ -588,7 +596,7 @@ public class TypesBuilder {
    * @param javaType Java type.
    * @param <T> Array item class type.
    */
-  private static <T extends com.github.kklisura.cdt.protocol.definition.types.type.array.ArrayItem>
+  private static <T extends com.github.kklisura.cdt.protocol.v2023.definition.types.type.array.ArrayItem>
       void registerTypeArrayItem(Class<T> clazz, String javaType) {
     ARRAY_TYPE_ITEM_TYPE_TO_JAVA_TYPE_MAP.put(clazz, javaType);
   }

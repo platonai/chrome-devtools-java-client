@@ -34,8 +34,8 @@ You can use following code, taken from, `LogRequestsExample`:
 package com.github.kklisura.cdt.examples;
 
 import com.github.kklisura.cdt.launch.ChromeLauncher;
-import com.github.kklisura.cdt.protocol.commands.Network;
-import com.github.kklisura.cdt.protocol.commands.Page;
+import commands.com.github.kklisura.cdt.protocol.v2023.Network;
+import commands.com.github.kklisura.cdt.protocol.v2023.Page;
 import com.github.kklisura.cdt.services.ChromeDevToolsService;
 import com.github.kklisura.cdt.services.ChromeService;
 import com.github.kklisura.cdt.services.types.ChromeTab;

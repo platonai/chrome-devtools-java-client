@@ -29,20 +29,21 @@ import com.github.kklisura.cdt.definition.builder.support.java.builder.*;
 import com.github.kklisura.cdt.definition.builder.support.java.builder.support.CombinedBuilders;
 import com.github.kklisura.cdt.definition.builder.support.java.builder.support.MethodParam;
 import com.github.kklisura.cdt.definition.builder.support.protocol.builder.support.DomainTypeResolver;
-import com.github.kklisura.cdt.protocol.definition.types.Command;
-import com.github.kklisura.cdt.protocol.definition.types.Domain;
-import com.github.kklisura.cdt.protocol.definition.types.Event;
-import com.github.kklisura.cdt.protocol.definition.types.type.ArrayType;
-import com.github.kklisura.cdt.protocol.definition.types.type.StringType;
-import com.github.kklisura.cdt.protocol.definition.types.type.array.items.StringArrayItem;
-import com.github.kklisura.cdt.protocol.definition.types.type.object.ObjectType;
-import com.github.kklisura.cdt.protocol.definition.types.type.object.Property;
-import com.github.kklisura.cdt.protocol.definition.types.type.object.properties.*;
-import com.github.kklisura.cdt.protocol.definition.types.type.object.properties.array.items.EnumArrayItem;
-import com.github.kklisura.cdt.protocol.definition.types.type.object.properties.array.items.RefArrayItem;
+import com.github.kklisura.cdt.protocol.v2023.definition.types.Command;
+import com.github.kklisura.cdt.protocol.v2023.definition.types.Domain;
+import com.github.kklisura.cdt.protocol.v2023.definition.types.Event;
+import com.github.kklisura.cdt.protocol.v2023.definition.types.type.ArrayType;
+import com.github.kklisura.cdt.protocol.v2023.definition.types.type.StringType;
+import com.github.kklisura.cdt.protocol.v2023.definition.types.type.array.items.StringArrayItem;
+import com.github.kklisura.cdt.protocol.v2023.definition.types.type.object.ObjectType;
+import com.github.kklisura.cdt.protocol.v2023.definition.types.type.object.Property;
+import com.github.kklisura.cdt.protocol.v2023.definition.types.type.object.properties.*;
+import com.github.kklisura.cdt.protocol.v2023.definition.types.type.object.properties.array.items.EnumArrayItem;
+import com.github.kklisura.cdt.protocol.v2023.definition.types.type.object.properties.array.items.RefArrayItem;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+
 import org.easymock.Capture;
 import org.easymock.EasyMockRunner;
 import org.easymock.EasyMockSupport;
@@ -454,9 +455,9 @@ public class CommandBuilderTest extends EasyMockSupport {
     final ArrayType resolvedRefType = new ArrayType();
     resolvedRefType.setId("arrayRefType");
 
-    final com.github.kklisura.cdt.protocol.definition.types.type.array.items.RefArrayItem
+    final com.github.kklisura.cdt.protocol.v2023.definition.types.type.array.items.RefArrayItem
         refArrayItem =
-            new com.github.kklisura.cdt.protocol.definition.types.type.array.items.RefArrayItem();
+            new com.github.kklisura.cdt.protocol.v2023.definition.types.type.array.items.RefArrayItem();
     refArrayItem.setRef("TestRefArrayItem");
     resolvedRefType.setItems(refArrayItem);
 
@@ -519,18 +520,18 @@ public class CommandBuilderTest extends EasyMockSupport {
     final ArrayType resolvedRefType = new ArrayType();
     resolvedRefType.setId("arrayRefType");
 
-    final com.github.kklisura.cdt.protocol.definition.types.type.array.items.RefArrayItem
+    final com.github.kklisura.cdt.protocol.v2023.definition.types.type.array.items.RefArrayItem
         refArrayItem =
-            new com.github.kklisura.cdt.protocol.definition.types.type.array.items.RefArrayItem();
+            new com.github.kklisura.cdt.protocol.v2023.definition.types.type.array.items.RefArrayItem();
     refArrayItem.setRef("TestRefArrayItem");
     resolvedRefType.setItems(refArrayItem);
 
     final ArrayType resolvedRefType2 = new ArrayType();
     resolvedRefType2.setId("arrayRefType2");
 
-    final com.github.kklisura.cdt.protocol.definition.types.type.array.items.RefArrayItem
+    final com.github.kklisura.cdt.protocol.v2023.definition.types.type.array.items.RefArrayItem
         refArrayItem2 =
-            new com.github.kklisura.cdt.protocol.definition.types.type.array.items.RefArrayItem();
+            new com.github.kklisura.cdt.protocol.v2023.definition.types.type.array.items.RefArrayItem();
     refArrayItem2.setRef("SomeOtherDomain.TestRefArrayItem2");
     resolvedRefType2.setItems(refArrayItem2);
 
@@ -643,8 +644,7 @@ public class CommandBuilderTest extends EasyMockSupport {
     final ArrayProperty arrayStringProperty = new ArrayProperty();
     arrayStringProperty.setName("arrayStringProperty");
     arrayStringProperty.setItems(
-        new com.github.kklisura.cdt.protocol.definition.types.type.object.properties.array.items
-            .StringArrayItem());
+        new StringArrayItem());
 
     command.setReturns(Collections.singletonList(arrayStringProperty));
     domain.setCommands(Collections.singletonList(command));

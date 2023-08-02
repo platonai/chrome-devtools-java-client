@@ -20,9 +20,9 @@ package com.github.kklisura.cdt.services;
  * #L%
  */
 
-import com.github.kklisura.cdt.protocol.ChromeDevTools;
-import com.github.kklisura.cdt.protocol.support.types.EventHandler;
-import com.github.kklisura.cdt.protocol.support.types.EventListener;
+import com.github.kklisura.cdt.protocol.v2023.ChromeDevTools;
+import com.github.kklisura.cdt.protocol.v2023.support.types.EventHandler;
+import com.github.kklisura.cdt.protocol.v2023.support.types.EventListener;
 import com.github.kklisura.cdt.services.exceptions.ChromeDevToolsInvocationException;
 import com.github.kklisura.cdt.services.types.MethodInvocation;
 

@@ -20,8 +20,8 @@ package com.github.kklisura.cdt.utils;
  * #L%
  */
 
-import com.github.kklisura.cdt.protocol.support.types.EventHandler;
-import com.github.kklisura.cdt.protocol.support.types.EventListener;
+import com.github.kklisura.cdt.protocol.v2023.support.types.EventHandler;
+import com.github.kklisura.cdt.protocol.v2023.support.types.EventListener;
 import java.io.Closeable;
 import java.io.IOException;
 import java.util.concurrent.CountDownLatch;

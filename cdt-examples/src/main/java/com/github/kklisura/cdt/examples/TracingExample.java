@@ -22,8 +22,8 @@ package com.github.kklisura.cdt.examples;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.kklisura.cdt.launch.ChromeLauncher;
-import com.github.kklisura.cdt.protocol.commands.Page;
-import com.github.kklisura.cdt.protocol.commands.Tracing;
+import com.github.kklisura.cdt.protocol.v2023.commands.Page;
+import com.github.kklisura.cdt.protocol.v2023.commands.Tracing;
 import com.github.kklisura.cdt.services.ChromeDevToolsService;
 import com.github.kklisura.cdt.services.ChromeService;
 import com.github.kklisura.cdt.services.types.ChromeTab;

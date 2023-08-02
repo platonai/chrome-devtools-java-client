@@ -21,10 +21,10 @@ package com.github.kklisura.cdt.examples;
  */
 
 import com.github.kklisura.cdt.launch.ChromeLauncher;
-import com.github.kklisura.cdt.protocol.commands.Network;
-import com.github.kklisura.cdt.protocol.commands.Page;
-import com.github.kklisura.cdt.protocol.commands.Performance;
-import com.github.kklisura.cdt.protocol.types.performance.Metric;
+import com.github.kklisura.cdt.protocol.v2023.commands.Network;
+import com.github.kklisura.cdt.protocol.v2023.commands.Page;
+import com.github.kklisura.cdt.protocol.v2023.commands.Performance;
+import com.github.kklisura.cdt.protocol.v2023.types.performance.Metric;
 import com.github.kklisura.cdt.services.ChromeDevToolsService;
 import com.github.kklisura.cdt.services.ChromeService;
 import com.github.kklisura.cdt.services.types.ChromeTab;

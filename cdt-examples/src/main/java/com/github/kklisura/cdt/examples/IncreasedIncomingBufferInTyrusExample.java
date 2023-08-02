@@ -21,9 +21,9 @@ package com.github.kklisura.cdt.examples;
  */
 
 import com.github.kklisura.cdt.launch.ChromeLauncher;
-import com.github.kklisura.cdt.protocol.commands.Page;
-import com.github.kklisura.cdt.protocol.types.page.PrintToPDF;
-import com.github.kklisura.cdt.protocol.types.page.PrintToPDFTransferMode;
+import com.github.kklisura.cdt.protocol.v2023.commands.Page;
+import com.github.kklisura.cdt.protocol.v2023.types.page.PrintToPDF;
+import com.github.kklisura.cdt.protocol.v2023.types.page.PrintToPDFTransferMode;
 import com.github.kklisura.cdt.services.ChromeDevToolsService;
 import com.github.kklisura.cdt.services.ChromeService;
 import com.github.kklisura.cdt.services.factory.impl.DefaultWebSocketContainerFactory;
@@ -109,7 +109,6 @@ public class IncreasedIncomingBufferInTyrusExample {
                       marginLeft,
                       marginRight,
                       pageRanges,
-                      ignoreInvalidPageRanges,
                       headerTemplate,
                       footerTemplate,
                       preferCSSPageSize,

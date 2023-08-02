@@ -25,7 +25,7 @@ import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 
-import com.github.kklisura.cdt.protocol.support.types.EventListener;
+import com.github.kklisura.cdt.protocol.v2023.support.types.EventListener;
 import java.io.Closeable;
 import java.io.IOException;
 import org.junit.Test;

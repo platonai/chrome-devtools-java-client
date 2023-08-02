@@ -21,11 +21,11 @@ package com.github.kklisura.cdt.examples;
  */
 
 import com.github.kklisura.cdt.launch.ChromeLauncher;
-import com.github.kklisura.cdt.protocol.commands.Emulation;
-import com.github.kklisura.cdt.protocol.commands.Page;
-import com.github.kklisura.cdt.protocol.types.page.CaptureScreenshotFormat;
-import com.github.kklisura.cdt.protocol.types.page.LayoutMetrics;
-import com.github.kklisura.cdt.protocol.types.page.Viewport;
+import com.github.kklisura.cdt.protocol.v2023.commands.Emulation;
+import com.github.kklisura.cdt.protocol.v2023.commands.Page;
+import com.github.kklisura.cdt.protocol.v2023.types.page.CaptureScreenshotFormat;
+import com.github.kklisura.cdt.protocol.v2023.types.page.LayoutMetrics;
+import com.github.kklisura.cdt.protocol.v2023.types.page.Viewport;
 import com.github.kklisura.cdt.services.ChromeDevToolsService;
 import com.github.kklisura.cdt.services.ChromeService;
 import com.github.kklisura.cdt.services.types.ChromeTab;
@@ -68,7 +68,7 @@ public class FullPageScreenshotExample {
     dump(
         outputFilename,
         page.captureScreenshot(
-            CaptureScreenshotFormat.PNG, 100, viewport, Boolean.TRUE, Boolean.FALSE));
+            CaptureScreenshotFormat.PNG, 100, viewport, Boolean.TRUE, Boolean.FALSE, Boolean.FALSE));
   }
 
   public static void main(String[] args) {

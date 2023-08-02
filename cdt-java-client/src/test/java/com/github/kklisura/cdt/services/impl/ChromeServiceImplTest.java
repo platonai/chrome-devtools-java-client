@@ -26,8 +26,8 @@ import static org.easymock.EasyMock.expect;
 import static org.junit.Assert.*;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.kklisura.cdt.protocol.ChromeDevTools;
-import com.github.kklisura.cdt.protocol.commands.Network;
+import com.github.kklisura.cdt.protocol.v2023.ChromeDevTools;
+import com.github.kklisura.cdt.protocol.v2023.commands.Network;
 import com.github.kklisura.cdt.services.WebSocketService;
 import com.github.kklisura.cdt.services.exceptions.ChromeServiceException;
 import com.github.kklisura.cdt.services.exceptions.WebSocketServiceException;

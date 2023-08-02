@@ -21,14 +21,14 @@ package com.github.kklisura.cdt.examples;
  */
 
 import com.github.kklisura.cdt.launch.ChromeLauncher;
-import com.github.kklisura.cdt.protocol.commands.CSS;
-import com.github.kklisura.cdt.protocol.commands.DOM;
-import com.github.kklisura.cdt.protocol.commands.Page;
-import com.github.kklisura.cdt.protocol.events.page.LoadEventFired;
-import com.github.kklisura.cdt.protocol.support.types.EventHandler;
-import com.github.kklisura.cdt.protocol.support.types.EventListener;
-import com.github.kklisura.cdt.protocol.types.css.CSSStyleSheetHeader;
-import com.github.kklisura.cdt.protocol.types.css.RuleUsage;
+import com.github.kklisura.cdt.protocol.v2023.commands.CSS;
+import com.github.kklisura.cdt.protocol.v2023.commands.DOM;
+import com.github.kklisura.cdt.protocol.v2023.commands.Page;
+import com.github.kklisura.cdt.protocol.v2023.events.page.LoadEventFired;
+import com.github.kklisura.cdt.protocol.v2023.support.types.EventHandler;
+import com.github.kklisura.cdt.protocol.v2023.support.types.EventListener;
+import com.github.kklisura.cdt.protocol.v2023.types.css.CSSStyleSheetHeader;
+import com.github.kklisura.cdt.protocol.v2023.types.css.RuleUsage;
 import com.github.kklisura.cdt.services.ChromeDevToolsService;
 import com.github.kklisura.cdt.services.ChromeService;
 import com.github.kklisura.cdt.services.types.ChromeTab;

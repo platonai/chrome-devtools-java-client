@@ -21,9 +21,9 @@ package com.github.kklisura.cdt.examples;
  */
 
 import com.github.kklisura.cdt.launch.ChromeLauncher;
-import com.github.kklisura.cdt.protocol.commands.*;
-import com.github.kklisura.cdt.protocol.types.dom.RGBA;
-import com.github.kklisura.cdt.protocol.types.overlay.HighlightConfig;
+import com.github.kklisura.cdt.protocol.v2023.commands.*;
+import com.github.kklisura.cdt.protocol.v2023.types.dom.RGBA;
+import com.github.kklisura.cdt.protocol.v2023.types.overlay.HighlightConfig;
 import com.github.kklisura.cdt.services.ChromeDevToolsService;
 import com.github.kklisura.cdt.services.ChromeService;
 import com.github.kklisura.cdt.services.types.ChromeTab;

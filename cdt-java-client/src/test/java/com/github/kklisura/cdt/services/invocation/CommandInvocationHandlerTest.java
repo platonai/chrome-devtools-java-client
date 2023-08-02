@@ -23,12 +23,12 @@ package com.github.kklisura.cdt.services.invocation;
 import static org.easymock.EasyMock.*;
 import static org.junit.Assert.*;
 
-import com.github.kklisura.cdt.protocol.support.annotations.EventName;
-import com.github.kklisura.cdt.protocol.support.annotations.ParamName;
-import com.github.kklisura.cdt.protocol.support.annotations.ReturnTypeParameter;
-import com.github.kklisura.cdt.protocol.support.annotations.Returns;
-import com.github.kklisura.cdt.protocol.support.types.EventHandler;
-import com.github.kklisura.cdt.protocol.support.types.EventListener;
+import com.github.kklisura.cdt.protocol.v2023.support.annotations.EventName;
+import com.github.kklisura.cdt.protocol.v2023.support.annotations.ParamName;
+import com.github.kklisura.cdt.protocol.v2023.support.annotations.ReturnTypeParameter;
+import com.github.kklisura.cdt.protocol.v2023.support.annotations.Returns;
+import com.github.kklisura.cdt.protocol.v2023.support.types.EventHandler;
+import com.github.kklisura.cdt.protocol.v2023.support.types.EventListener;
 import com.github.kklisura.cdt.services.ChromeDevToolsService;
 import com.github.kklisura.cdt.services.types.MethodInvocation;
 import java.lang.reflect.Method;

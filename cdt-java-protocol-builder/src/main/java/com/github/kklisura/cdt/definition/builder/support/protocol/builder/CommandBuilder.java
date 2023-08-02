@@ -31,11 +31,11 @@ import com.github.kklisura.cdt.definition.builder.support.java.builder.support.M
 import com.github.kklisura.cdt.definition.builder.support.protocol.builder.support.DomainTypeResolver;
 import com.github.kklisura.cdt.definition.builder.support.protocol.builder.support.PropertyHandlerResult;
 import com.github.kklisura.cdt.definition.builder.support.protocol.builder.support.TypeBuildRequest;
-import com.github.kklisura.cdt.protocol.definition.types.Command;
-import com.github.kklisura.cdt.protocol.definition.types.Domain;
-import com.github.kklisura.cdt.protocol.definition.types.Event;
-import com.github.kklisura.cdt.protocol.definition.types.type.object.ObjectType;
-import com.github.kklisura.cdt.protocol.definition.types.type.object.Property;
+import com.github.kklisura.cdt.protocol.v2023.definition.types.Command;
+import com.github.kklisura.cdt.protocol.v2023.definition.types.Domain;
+import com.github.kklisura.cdt.protocol.v2023.definition.types.Event;
+import com.github.kklisura.cdt.protocol.v2023.definition.types.type.object.ObjectType;
+import com.github.kklisura.cdt.protocol.v2023.definition.types.type.object.Property;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
