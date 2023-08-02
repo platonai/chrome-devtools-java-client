@@ -4,7 +4,7 @@ package com.github.kklisura.cdt.protocol.types.tracing;
  * #%L
  * cdt-java-client
  * %%
- * Copyright (C) 2018 - 2021 Kenan Klisura
+ * Copyright (C) 2018 - 2023 Kenan Klisura
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,6 +28,8 @@ public class TraceConfig {
 
   @Optional private TraceConfigRecordMode recordMode;
 
+  @Optional private Double traceBufferSizeInKb;
+
   @Optional private Boolean enableSampling;
 
   @Optional private Boolean enableSystrace;
@@ -50,6 +52,22 @@ public class TraceConfig {
   /** Controls how the trace buffer stores data. */
   public void setRecordMode(TraceConfigRecordMode recordMode) {
     this.recordMode = recordMode;
+  }
+
+  /**
+   * Size of the trace buffer in kilobytes. If not specified or zero is passed, a default value of
+   * 200 MB would be used.
+   */
+  public Double getTraceBufferSizeInKb() {
+    return traceBufferSizeInKb;
+  }
+
+  /**
+   * Size of the trace buffer in kilobytes. If not specified or zero is passed, a default value of
+   * 200 MB would be used.
+   */
+  public void setTraceBufferSizeInKb(Double traceBufferSizeInKb) {
+    this.traceBufferSizeInKb = traceBufferSizeInKb;
   }
 
   /** Turns on JavaScript stack sampling. */

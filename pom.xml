@@ -67,6 +67,9 @@
                         </execution>
                     </executions>
                     <configuration>
+                        <skipAddThirdParty>true</skipAddThirdParty>
+
+
                         <outputDirectory>${project.basedir}</outputDirectory>
                         <canUpdateCopyright>true</canUpdateCopyright>
                         <failOnMissing>true</failOnMissing>

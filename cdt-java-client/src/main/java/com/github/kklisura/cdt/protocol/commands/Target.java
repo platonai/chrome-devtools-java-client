@@ -4,7 +4,7 @@ package com.github.kklisura.cdt.protocol.commands;
  * #%L
  * cdt-java-client
  * %%
- * Copyright (C) 2018 - 2021 Kenan Klisura
+ * Copyright (C) 2018 - 2023 Kenan Klisura
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,6 +35,7 @@ import com.github.kklisura.cdt.protocol.support.annotations.ReturnTypeParameter;
 import com.github.kklisura.cdt.protocol.support.annotations.Returns;
 import com.github.kklisura.cdt.protocol.support.types.EventHandler;
 import com.github.kklisura.cdt.protocol.support.types.EventListener;
+import com.github.kklisura.cdt.protocol.types.target.FilterEntry;
 import com.github.kklisura.cdt.protocol.types.target.RemoteLocation;
 import com.github.kklisura.cdt.protocol.types.target.TargetInfo;
 import java.util.List;
@@ -130,13 +131,17 @@ public interface Target {
    * @param disposeOnDetach If specified, disposes this context when debugging session disconnects.
    * @param proxyServer Proxy server, similar to the one passed to --proxy-server
    * @param proxyBypassList Proxy bypass list, similar to the one passed to --proxy-bypass-list
+   * @param originsWithUniversalNetworkAccess An optional list of origins to grant unlimited
+   *     cross-origin access to. Parts of the URL other than those constituting origin are ignored.
    */
   @Experimental
   @Returns("browserContextId")
   String createBrowserContext(
       @Optional @ParamName("disposeOnDetach") Boolean disposeOnDetach,
       @Optional @ParamName("proxyServer") String proxyServer,
-      @Optional @ParamName("proxyBypassList") String proxyBypassList);
+      @Optional @ParamName("proxyBypassList") String proxyBypassList,
+      @Optional @ParamName("originsWithUniversalNetworkAccess")
+          List<String> originsWithUniversalNetworkAccess);
 
   /** Returns all browser contexts created with `Target.createBrowserContext` method. */
   @Experimental
@@ -166,16 +171,18 @@ public interface Target {
    * @param newWindow Whether to create a new Window or Tab (chrome-only, false by default).
    * @param background Whether to create the target in background or foreground (chrome-only, false
    *     by default).
+   * @param forTab Whether to create the target of type "tab".
    */
   @Returns("targetId")
   String createTarget(
       @ParamName("url") String url,
       @Optional @ParamName("width") Integer width,
       @Optional @ParamName("height") Integer height,
-      @Optional @ParamName("browserContextId") String browserContextId,
+      @Experimental @Optional @ParamName("browserContextId") String browserContextId,
       @Experimental @Optional @ParamName("enableBeginFrameControl") Boolean enableBeginFrameControl,
       @Optional @ParamName("newWindow") Boolean newWindow,
-      @Optional @ParamName("background") Boolean background);
+      @Optional @ParamName("background") Boolean background,
+      @Experimental @Optional @ParamName("forTab") Boolean forTab);
 
   /** Detaches session with given id. */
   void detachFromTarget();
@@ -219,6 +226,18 @@ public interface Target {
   List<TargetInfo> getTargets();
 
   /**
+   * Retrieves a list of available targets.
+   *
+   * @param filter Only targets matching filter will be reported. If filter is not specified and
+   *     target discovery is currently enabled, a filter used for target discovery is used for
+   *     consistency.
+   */
+  @Returns("targetInfos")
+  @ReturnTypeParameter(TargetInfo.class)
+  List<TargetInfo> getTargets(
+      @Experimental @Optional @ParamName("filter") List<FilterEntry> filter);
+
+  /**
    * Sends protocol message over session with given id. Consider using flat mode instead; see
    * commands attachToTarget, setAutoAttach, and crbug.com/991325.
    *
@@ -244,7 +263,8 @@ public interface Target {
   /**
    * Controls whether to automatically attach to new targets which are considered to be related to
    * this one. When turned on, attaches to all existing related targets as well. When turned off,
-   * automatically detaches from all currently attached targets.
+   * automatically detaches from all currently attached targets. This also clears all targets added
+   * by `autoAttachRelated` from the list of targets to watch for creation of related targets.
    *
    * @param autoAttach Whether to auto-attach to related targets.
    * @param waitForDebuggerOnStart Whether to pause new targets when attaching to them. Use
@@ -258,7 +278,8 @@ public interface Target {
   /**
    * Controls whether to automatically attach to new targets which are considered to be related to
    * this one. When turned on, attaches to all existing related targets as well. When turned off,
-   * automatically detaches from all currently attached targets.
+   * automatically detaches from all currently attached targets. This also clears all targets added
+   * by `autoAttachRelated` from the list of targets to watch for creation of related targets.
    *
    * @param autoAttach Whether to auto-attach to related targets.
    * @param waitForDebuggerOnStart Whether to pause new targets when attaching to them. Use
@@ -266,12 +287,48 @@ public interface Target {
    * @param flatten Enables "flat" access to the session via specifying sessionId attribute in the
    *     commands. We plan to make this the default, deprecate non-flattened mode, and eventually
    *     retire it. See crbug.com/991325.
+   * @param filter Only targets matching filter will be attached.
    */
   @Experimental
   void setAutoAttach(
       @ParamName("autoAttach") Boolean autoAttach,
       @ParamName("waitForDebuggerOnStart") Boolean waitForDebuggerOnStart,
-      @Optional @ParamName("flatten") Boolean flatten);
+      @Optional @ParamName("flatten") Boolean flatten,
+      @Experimental @Optional @ParamName("filter") List<FilterEntry> filter);
+
+  /**
+   * Adds the specified target to the list of targets that will be monitored for any related target
+   * creation (such as child frames, child workers and new versions of service worker) and reported
+   * through `attachedToTarget`. The specified target is also auto-attached. This cancels the effect
+   * of any previous `setAutoAttach` and is also cancelled by subsequent `setAutoAttach`. Only
+   * available at the Browser target.
+   *
+   * @param targetId
+   * @param waitForDebuggerOnStart Whether to pause new targets when attaching to them. Use
+   *     `Runtime.runIfWaitingForDebugger` to run paused targets.
+   */
+  @Experimental
+  void autoAttachRelated(
+      @ParamName("targetId") String targetId,
+      @ParamName("waitForDebuggerOnStart") Boolean waitForDebuggerOnStart);
+
+  /**
+   * Adds the specified target to the list of targets that will be monitored for any related target
+   * creation (such as child frames, child workers and new versions of service worker) and reported
+   * through `attachedToTarget`. The specified target is also auto-attached. This cancels the effect
+   * of any previous `setAutoAttach` and is also cancelled by subsequent `setAutoAttach`. Only
+   * available at the Browser target.
+   *
+   * @param targetId
+   * @param waitForDebuggerOnStart Whether to pause new targets when attaching to them. Use
+   *     `Runtime.runIfWaitingForDebugger` to run paused targets.
+   * @param filter Only targets matching filter will be attached.
+   */
+  @Experimental
+  void autoAttachRelated(
+      @ParamName("targetId") String targetId,
+      @ParamName("waitForDebuggerOnStart") Boolean waitForDebuggerOnStart,
+      @Experimental @Optional @ParamName("filter") List<FilterEntry> filter);
 
   /**
    * Controls whether to discover available targets and notify via
@@ -280,6 +337,18 @@ public interface Target {
    * @param discover Whether to discover available targets.
    */
   void setDiscoverTargets(@ParamName("discover") Boolean discover);
+
+  /**
+   * Controls whether to discover available targets and notify via
+   * `targetCreated/targetInfoChanged/targetDestroyed` events.
+   *
+   * @param discover Whether to discover available targets.
+   * @param filter Only targets matching filter will be attached. If `discover` is false, `filter`
+   *     must be omitted or empty.
+   */
+  void setDiscoverTargets(
+      @ParamName("discover") Boolean discover,
+      @Experimental @Optional @ParamName("filter") List<FilterEntry> filter);
 
   /**
    * Enables target discovery for the specified locations, when `setDiscoverTargets` was set to

@@ -4,7 +4,7 @@ package com.github.kklisura.cdt.protocol.types.css;
  * #%L
  * cdt-java-client
  * %%
- * Copyright (C) 2018 - 2021 Kenan Klisura
+ * Copyright (C) 2018 - 2023 Kenan Klisura
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,6 +20,7 @@ package com.github.kklisura.cdt.protocol.types.css;
  * #L%
  */
 
+import com.github.kklisura.cdt.protocol.support.annotations.Experimental;
 import com.github.kklisura.cdt.protocol.support.annotations.Optional;
 import java.util.List;
 
@@ -35,7 +36,13 @@ public class MatchedStylesForNode {
 
   @Optional private List<InheritedStyleEntry> inherited;
 
+  @Optional private List<InheritedPseudoElementMatches> inheritedPseudoElements;
+
   @Optional private List<CSSKeyframesRule> cssKeyframesRules;
+
+  @Optional private List<CSSPositionFallbackRule> cssPositionFallbackRules;
+
+  @Experimental @Optional private Integer parentLayoutNodeId;
 
   /** Inline style for the specified DOM node. */
   public CSSStyle getInlineStyle() {
@@ -87,6 +94,23 @@ public class MatchedStylesForNode {
     this.inherited = inherited;
   }
 
+  /**
+   * A chain of inherited pseudo element styles (from the immediate node parent up to the DOM tree
+   * root).
+   */
+  public List<InheritedPseudoElementMatches> getInheritedPseudoElements() {
+    return inheritedPseudoElements;
+  }
+
+  /**
+   * A chain of inherited pseudo element styles (from the immediate node parent up to the DOM tree
+   * root).
+   */
+  public void setInheritedPseudoElements(
+      List<InheritedPseudoElementMatches> inheritedPseudoElements) {
+    this.inheritedPseudoElements = inheritedPseudoElements;
+  }
+
   /** A list of CSS keyframed animations matching this node. */
   public List<CSSKeyframesRule> getCssKeyframesRules() {
     return cssKeyframesRules;
@@ -95,5 +119,25 @@ public class MatchedStylesForNode {
   /** A list of CSS keyframed animations matching this node. */
   public void setCssKeyframesRules(List<CSSKeyframesRule> cssKeyframesRules) {
     this.cssKeyframesRules = cssKeyframesRules;
+  }
+
+  /** A list of CSS position fallbacks matching this node. */
+  public List<CSSPositionFallbackRule> getCssPositionFallbackRules() {
+    return cssPositionFallbackRules;
+  }
+
+  /** A list of CSS position fallbacks matching this node. */
+  public void setCssPositionFallbackRules(List<CSSPositionFallbackRule> cssPositionFallbackRules) {
+    this.cssPositionFallbackRules = cssPositionFallbackRules;
+  }
+
+  /** Id of the first parent element that does not have display: contents. */
+  public Integer getParentLayoutNodeId() {
+    return parentLayoutNodeId;
+  }
+
+  /** Id of the first parent element that does not have display: contents. */
+  public void setParentLayoutNodeId(Integer parentLayoutNodeId) {
+    this.parentLayoutNodeId = parentLayoutNodeId;
   }
 }

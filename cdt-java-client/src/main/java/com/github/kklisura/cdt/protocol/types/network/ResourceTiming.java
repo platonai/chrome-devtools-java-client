@@ -4,7 +4,7 @@ package com.github.kklisura.cdt.protocol.types.network;
  * #%L
  * cdt-java-client
  * %%
- * Copyright (C) 2018 - 2021 Kenan Klisura
+ * Copyright (C) 2018 - 2023 Kenan Klisura
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -58,6 +58,8 @@ public class ResourceTiming {
   @Experimental private Double pushStart;
 
   @Experimental private Double pushEnd;
+
+  @Experimental private Double receiveHeadersStart;
 
   private Double receiveHeadersEnd;
 
@@ -235,6 +237,16 @@ public class ResourceTiming {
   /** Time the server finished pushing request. */
   public void setPushEnd(Double pushEnd) {
     this.pushEnd = pushEnd;
+  }
+
+  /** Started receiving response headers. */
+  public Double getReceiveHeadersStart() {
+    return receiveHeadersStart;
+  }
+
+  /** Started receiving response headers. */
+  public void setReceiveHeadersStart(Double receiveHeadersStart) {
+    this.receiveHeadersStart = receiveHeadersStart;
   }
 
   /** Finished receiving response headers. */

@@ -4,7 +4,7 @@ package com.github.kklisura.cdt.protocol.commands;
  * #%L
  * cdt-java-client
  * %%
- * Copyright (C) 2018 - 2021 Kenan Klisura
+ * Copyright (C) 2018 - 2023 Kenan Klisura
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -110,7 +110,7 @@ public interface Input {
    * @param commands Editing commands to send with the key event (e.g., 'selectAll') (default: []).
    *     These are related to but not equal the command names used in `document.execCommand` and
    *     NSStandardKeyBindingResponding. See
-   *     https://source.chromium.org/chromium/chromium/src/+/master:third_party/blink/renderer/core/editing/commands/editor_command_names.h
+   *     https://source.chromium.org/chromium/chromium/src/+/main:third_party/blink/renderer/core/editing/commands/editor_command_names.h
    *     for valid command names.
    */
   void dispatchKeyEvent(
@@ -138,6 +138,38 @@ public interface Input {
    */
   @Experimental
   void insertText(@ParamName("text") String text);
+
+  /**
+   * This method sets the current candidate text for ime. Use imeCommitComposition to commit the
+   * final text. Use imeSetComposition with empty string as text to cancel composition.
+   *
+   * @param text The text to insert
+   * @param selectionStart selection start
+   * @param selectionEnd selection end
+   */
+  @Experimental
+  void imeSetComposition(
+      @ParamName("text") String text,
+      @ParamName("selectionStart") Integer selectionStart,
+      @ParamName("selectionEnd") Integer selectionEnd);
+
+  /**
+   * This method sets the current candidate text for ime. Use imeCommitComposition to commit the
+   * final text. Use imeSetComposition with empty string as text to cancel composition.
+   *
+   * @param text The text to insert
+   * @param selectionStart selection start
+   * @param selectionEnd selection end
+   * @param replacementStart replacement start
+   * @param replacementEnd replacement end
+   */
+  @Experimental
+  void imeSetComposition(
+      @ParamName("text") String text,
+      @ParamName("selectionStart") Integer selectionStart,
+      @ParamName("selectionEnd") Integer selectionEnd,
+      @Optional @ParamName("replacementStart") Integer replacementStart,
+      @Optional @ParamName("replacementEnd") Integer replacementEnd);
 
   /**
    * Dispatches a mouse event to the page.
@@ -231,6 +263,9 @@ public interface Input {
       @ParamName("touchPoints") List<TouchPoint> touchPoints,
       @Optional @ParamName("modifiers") Integer modifiers,
       @Optional @ParamName("timestamp") Double timestamp);
+
+  /** Cancels any active dragging in the page. */
+  void cancelDragging();
 
   /**
    * Emulates touch event from the mouse event parameters.

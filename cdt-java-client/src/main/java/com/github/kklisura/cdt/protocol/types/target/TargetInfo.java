@@ -4,7 +4,7 @@ package com.github.kklisura.cdt.protocol.types.target;
  * #%L
  * cdt-java-client
  * %%
- * Copyright (C) 2018 - 2021 Kenan Klisura
+ * Copyright (C) 2018 - 2023 Kenan Klisura
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,6 +42,8 @@ public class TargetInfo {
   @Experimental @Optional private String openerFrameId;
 
   @Experimental @Optional private String browserContextId;
+
+  @Experimental @Optional private String subtype;
 
   public String getTargetId() {
     return targetId;
@@ -121,5 +123,21 @@ public class TargetInfo {
 
   public void setBrowserContextId(String browserContextId) {
     this.browserContextId = browserContextId;
+  }
+
+  /**
+   * Provides additional details for specific target types. For example, for the type of "page",
+   * this may be set to "portal" or "prerender".
+   */
+  public String getSubtype() {
+    return subtype;
+  }
+
+  /**
+   * Provides additional details for specific target types. For example, for the type of "page",
+   * this may be set to "portal" or "prerender".
+   */
+  public void setSubtype(String subtype) {
+    this.subtype = subtype;
   }
 }

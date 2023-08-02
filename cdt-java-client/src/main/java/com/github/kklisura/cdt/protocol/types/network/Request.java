@@ -4,7 +4,7 @@ package com.github.kklisura.cdt.protocol.types.network;
  * #%L
  * cdt-java-client
  * %%
- * Copyright (C) 2018 - 2021 Kenan Klisura
+ * Copyright (C) 2018 - 2023 Kenan Klisura
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -52,6 +52,8 @@ public class Request {
   @Optional private Boolean isLinkPreload;
 
   @Experimental @Optional private TrustTokenParams trustTokenParams;
+
+  @Experimental @Optional private Boolean isSameSite;
 
   /** Request URL (without fragment). */
   public String getUrl() {
@@ -183,5 +185,21 @@ public class Request {
    */
   public void setTrustTokenParams(TrustTokenParams trustTokenParams) {
     this.trustTokenParams = trustTokenParams;
+  }
+
+  /**
+   * True if this resource request is considered to be the 'same site' as the request correspondinfg
+   * to the main frame.
+   */
+  public Boolean getIsSameSite() {
+    return isSameSite;
+  }
+
+  /**
+   * True if this resource request is considered to be the 'same site' as the request correspondinfg
+   * to the main frame.
+   */
+  public void setIsSameSite(Boolean isSameSite) {
+    this.isSameSite = isSameSite;
   }
 }

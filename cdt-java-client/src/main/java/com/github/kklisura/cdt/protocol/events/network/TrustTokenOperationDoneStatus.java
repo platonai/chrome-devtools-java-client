@@ -4,7 +4,7 @@ package com.github.kklisura.cdt.protocol.events.network;
  * #%L
  * cdt-java-client
  * %%
- * Copyright (C) 2018 - 2021 Kenan Klisura
+ * Copyright (C) 2018 - 2023 Kenan Klisura
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,6 +32,8 @@ public enum TrustTokenOperationDoneStatus {
   OK,
   @JsonProperty("InvalidArgument")
   INVALID_ARGUMENT,
+  @JsonProperty("MissingIssuerKeys")
+  MISSING_ISSUER_KEYS,
   @JsonProperty("FailedPrecondition")
   FAILED_PRECONDITION,
   @JsonProperty("ResourceExhausted")
@@ -40,6 +42,8 @@ public enum TrustTokenOperationDoneStatus {
   ALREADY_EXISTS,
   @JsonProperty("Unavailable")
   UNAVAILABLE,
+  @JsonProperty("Unauthorized")
+  UNAUTHORIZED,
   @JsonProperty("BadResponse")
   BAD_RESPONSE,
   @JsonProperty("InternalError")

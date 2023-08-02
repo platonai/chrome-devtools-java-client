@@ -4,7 +4,7 @@ package com.github.kklisura.cdt.protocol.types.browser;
  * #%L
  * cdt-java-client
  * %%
- * Copyright (C) 2018 - 2021 Kenan Klisura
+ * Copyright (C) 2018 - 2023 Kenan Klisura
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -43,6 +43,10 @@ public enum PermissionType {
   FLASH,
   @JsonProperty("geolocation")
   GEOLOCATION,
+  @JsonProperty("idleDetection")
+  IDLE_DETECTION,
+  @JsonProperty("localFonts")
+  LOCAL_FONTS,
   @JsonProperty("midi")
   MIDI,
   @JsonProperty("midiSysex")
@@ -59,14 +63,18 @@ public enum PermissionType {
   PROTECTED_MEDIA_IDENTIFIER,
   @JsonProperty("sensors")
   SENSORS,
+  @JsonProperty("storageAccess")
+  STORAGE_ACCESS,
+  @JsonProperty("topLevelStorageAccess")
+  TOP_LEVEL_STORAGE_ACCESS,
   @JsonProperty("videoCapture")
   VIDEO_CAPTURE,
   @JsonProperty("videoCapturePanTiltZoom")
   VIDEO_CAPTURE_PAN_TILT_ZOOM,
-  @JsonProperty("idleDetection")
-  IDLE_DETECTION,
   @JsonProperty("wakeLockScreen")
   WAKE_LOCK_SCREEN,
   @JsonProperty("wakeLockSystem")
-  WAKE_LOCK_SYSTEM
+  WAKE_LOCK_SYSTEM,
+  @JsonProperty("windowManagement")
+  WINDOW_MANAGEMENT
 }

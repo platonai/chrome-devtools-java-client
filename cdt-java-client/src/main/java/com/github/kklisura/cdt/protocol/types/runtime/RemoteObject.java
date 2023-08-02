@@ -4,7 +4,7 @@ package com.github.kklisura.cdt.protocol.types.runtime;
  * #%L
  * cdt-java-client
  * %%
- * Copyright (C) 2018 - 2021 Kenan Klisura
+ * Copyright (C) 2018 - 2023 Kenan Klisura
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -37,6 +37,10 @@ public class RemoteObject {
   @Optional private String unserializableValue;
 
   @Optional private String description;
+
+  @Deprecated @Optional private DeepSerializedValue webDriverValue;
+
+  @Experimental @Optional private DeepSerializedValue deepSerializedValue;
 
   @Optional private String objectId;
 
@@ -114,6 +118,26 @@ public class RemoteObject {
   /** String representation of the object. */
   public void setDescription(String description) {
     this.description = description;
+  }
+
+  /** Deprecated. Use `deepSerializedValue` instead. WebDriver BiDi representation of the value. */
+  public DeepSerializedValue getWebDriverValue() {
+    return webDriverValue;
+  }
+
+  /** Deprecated. Use `deepSerializedValue` instead. WebDriver BiDi representation of the value. */
+  public void setWebDriverValue(DeepSerializedValue webDriverValue) {
+    this.webDriverValue = webDriverValue;
+  }
+
+  /** Deep serialized value. */
+  public DeepSerializedValue getDeepSerializedValue() {
+    return deepSerializedValue;
+  }
+
+  /** Deep serialized value. */
+  public void setDeepSerializedValue(DeepSerializedValue deepSerializedValue) {
+    this.deepSerializedValue = deepSerializedValue;
   }
 
   /** Unique object identifier (for non-primitive values). */

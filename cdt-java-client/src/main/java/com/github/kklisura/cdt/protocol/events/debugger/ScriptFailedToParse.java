@@ -4,7 +4,7 @@ package com.github.kklisura.cdt.protocol.events.debugger;
  * #%L
  * cdt-java-client
  * %%
- * Copyright (C) 2018 - 2021 Kenan Klisura
+ * Copyright (C) 2018 - 2023 Kenan Klisura
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -133,22 +133,28 @@ public class ScriptFailedToParse {
     this.executionContextId = executionContextId;
   }
 
-  /** Content hash of the script. */
+  /** Content hash of the script, SHA-256. */
   public String getHash() {
     return hash;
   }
 
-  /** Content hash of the script. */
+  /** Content hash of the script, SHA-256. */
   public void setHash(String hash) {
     this.hash = hash;
   }
 
-  /** Embedder-specific auxiliary data. */
+  /**
+   * Embedder-specific auxiliary data likely matching {isDefault: boolean, type:
+   * 'default'|'isolated'|'worker', frameId: string}
+   */
   public Map<String, Object> getExecutionContextAuxData() {
     return executionContextAuxData;
   }
 
-  /** Embedder-specific auxiliary data. */
+  /**
+   * Embedder-specific auxiliary data likely matching {isDefault: boolean, type:
+   * 'default'|'isolated'|'worker', frameId: string}
+   */
   public void setExecutionContextAuxData(Map<String, Object> executionContextAuxData) {
     this.executionContextAuxData = executionContextAuxData;
   }

@@ -4,7 +4,7 @@ package com.github.kklisura.cdt.protocol.events.network;
  * #%L
  * cdt-java-client
  * %%
- * Copyright (C) 2018 - 2021 Kenan Klisura
+ * Copyright (C) 2018 - 2023 Kenan Klisura
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -43,7 +43,13 @@ public class ResponseReceivedExtraInfo {
 
   private IPAddressSpace resourceIPAddressSpace;
 
+  private Integer statusCode;
+
   @Optional private String headersText;
+
+  @Optional private String cookiePartitionKey;
+
+  @Optional private Boolean cookiePartitionKeyOpaque;
 
   /** Request identifier. Used to match this information to another responseReceived event. */
   public String getRequestId() {
@@ -100,6 +106,26 @@ public class ResponseReceivedExtraInfo {
   }
 
   /**
+   * The status code of the response. This is useful in cases the request failed and no
+   * responseReceived event is triggered, which is the case for, e.g., CORS errors. This is also the
+   * correct status code for cached requests, where the status in responseReceived is a 200 and this
+   * will be 304.
+   */
+  public Integer getStatusCode() {
+    return statusCode;
+  }
+
+  /**
+   * The status code of the response. This is useful in cases the request failed and no
+   * responseReceived event is triggered, which is the case for, e.g., CORS errors. This is also the
+   * correct status code for cached requests, where the status in responseReceived is a 200 and this
+   * will be 304.
+   */
+  public void setStatusCode(Integer statusCode) {
+    this.statusCode = statusCode;
+  }
+
+  /**
    * Raw response header text as it was received over the wire. The raw text may not always be
    * available, such as in the case of HTTP/2 or QUIC.
    */
@@ -113,5 +139,35 @@ public class ResponseReceivedExtraInfo {
    */
   public void setHeadersText(String headersText) {
     this.headersText = headersText;
+  }
+
+  /**
+   * The cookie partition key that will be used to store partitioned cookies set in this response.
+   * Only sent when partitioned cookies are enabled.
+   */
+  public String getCookiePartitionKey() {
+    return cookiePartitionKey;
+  }
+
+  /**
+   * The cookie partition key that will be used to store partitioned cookies set in this response.
+   * Only sent when partitioned cookies are enabled.
+   */
+  public void setCookiePartitionKey(String cookiePartitionKey) {
+    this.cookiePartitionKey = cookiePartitionKey;
+  }
+
+  /**
+   * True if partitioned cookies are enabled, but the partition key is not serializeable to string.
+   */
+  public Boolean getCookiePartitionKeyOpaque() {
+    return cookiePartitionKeyOpaque;
+  }
+
+  /**
+   * True if partitioned cookies are enabled, but the partition key is not serializeable to string.
+   */
+  public void setCookiePartitionKeyOpaque(Boolean cookiePartitionKeyOpaque) {
+    this.cookiePartitionKeyOpaque = cookiePartitionKeyOpaque;
   }
 }

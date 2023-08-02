@@ -4,7 +4,7 @@ package com.github.kklisura.cdt.protocol.commands;
  * #%L
  * cdt-java-client
  * %%
- * Copyright (C) 2018 - 2021 Kenan Klisura
+ * Copyright (C) 2018 - 2023 Kenan Klisura
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,11 +33,13 @@ import com.github.kklisura.cdt.protocol.support.types.EventHandler;
 import com.github.kklisura.cdt.protocol.support.types.EventListener;
 import com.github.kklisura.cdt.protocol.types.dom.RGBA;
 import com.github.kklisura.cdt.protocol.types.overlay.ColorFormat;
+import com.github.kklisura.cdt.protocol.types.overlay.ContainerQueryHighlightConfig;
 import com.github.kklisura.cdt.protocol.types.overlay.FlexNodeHighlightConfig;
 import com.github.kklisura.cdt.protocol.types.overlay.GridNodeHighlightConfig;
 import com.github.kklisura.cdt.protocol.types.overlay.HighlightConfig;
 import com.github.kklisura.cdt.protocol.types.overlay.HingeConfig;
 import com.github.kklisura.cdt.protocol.types.overlay.InspectMode;
+import com.github.kklisura.cdt.protocol.types.overlay.IsolatedElementHighlightConfig;
 import com.github.kklisura.cdt.protocol.types.overlay.ScrollSnapHighlightConfig;
 import com.github.kklisura.cdt.protocol.types.overlay.SourceOrderConfig;
 import java.util.List;
@@ -98,19 +100,25 @@ public interface Overlay {
   void hideHighlight();
 
   /**
-   * Highlights owner element of the frame with given id.
+   * Highlights owner element of the frame with given id. Deprecated: Doesn't work reliablity and
+   * cannot be fixed due to process separatation (the owner node might be in a different process).
+   * Determine the owner node in the client and use highlightNode.
    *
    * @param frameId Identifier of the frame to highlight.
    */
+  @Deprecated
   void highlightFrame(@ParamName("frameId") String frameId);
 
   /**
-   * Highlights owner element of the frame with given id.
+   * Highlights owner element of the frame with given id. Deprecated: Doesn't work reliablity and
+   * cannot be fixed due to process separatation (the owner node might be in a different process).
+   * Determine the owner node in the client and use highlightNode.
    *
    * @param frameId Identifier of the frame to highlight.
    * @param contentColor The content box highlight fill color (default: transparent).
    * @param contentOutlineColor The content box highlight outline color (default: transparent).
    */
+  @Deprecated
   void highlightFrame(
       @ParamName("frameId") String frameId,
       @Optional @ParamName("contentColor") RGBA contentColor,
@@ -288,6 +296,14 @@ public interface Overlay {
           List<ScrollSnapHighlightConfig> scrollSnapHighlightConfigs);
 
   /**
+   * @param containerQueryHighlightConfigs An array of node identifiers and descriptors for the
+   *     highlight appearance.
+   */
+  void setShowContainerQueryOverlays(
+      @ParamName("containerQueryHighlightConfigs")
+          List<ContainerQueryHighlightConfig> containerQueryHighlightConfigs);
+
+  /**
    * Requests that backend shows paint rectangles
    *
    * @param result True for showing paint rectangles
@@ -309,10 +325,11 @@ public interface Overlay {
   void setShowScrollBottleneckRects(@ParamName("show") Boolean show);
 
   /**
-   * Requests that backend shows hit-test borders on layers
+   * Deprecated, no longer has any effect.
    *
    * @param show True for showing hit-test borders
    */
+  @Deprecated
   void setShowHitTestBorders(@ParamName("show") Boolean show);
 
   /**
@@ -338,6 +355,16 @@ public interface Overlay {
    * @param hingeConfig hinge data, null means hideHinge
    */
   void setShowHinge(@Optional @ParamName("hingeConfig") HingeConfig hingeConfig);
+
+  /**
+   * Show elements in isolation mode with overlays.
+   *
+   * @param isolatedElementHighlightConfigs An array of node identifiers and descriptors for the
+   *     highlight appearance.
+   */
+  void setShowIsolatedElements(
+      @ParamName("isolatedElementHighlightConfigs")
+          List<IsolatedElementHighlightConfig> isolatedElementHighlightConfigs);
 
   /**
    * Fired when the node should be inspected. This happens after call to `setInspectMode` or when

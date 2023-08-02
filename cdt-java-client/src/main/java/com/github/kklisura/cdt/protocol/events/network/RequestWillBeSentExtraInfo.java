@@ -4,7 +4,7 @@ package com.github.kklisura.cdt.protocol.events.network;
  * #%L
  * cdt-java-client
  * %%
- * Copyright (C) 2018 - 2021 Kenan Klisura
+ * Copyright (C) 2018 - 2023 Kenan Klisura
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,6 +24,7 @@ import com.github.kklisura.cdt.protocol.support.annotations.Experimental;
 import com.github.kklisura.cdt.protocol.support.annotations.Optional;
 import com.github.kklisura.cdt.protocol.types.network.BlockedCookieWithReason;
 import com.github.kklisura.cdt.protocol.types.network.ClientSecurityState;
+import com.github.kklisura.cdt.protocol.types.network.ConnectTiming;
 import java.util.List;
 import java.util.Map;
 
@@ -42,7 +43,11 @@ public class RequestWillBeSentExtraInfo {
 
   private Map<String, Object> headers;
 
+  @Experimental private ConnectTiming connectTiming;
+
   @Optional private ClientSecurityState clientSecurityState;
+
+  @Optional private Boolean siteHasCookieInOtherPartition;
 
   /** Request identifier. Used to match this information to an existing requestWillBeSent event. */
   public String getRequestId() {
@@ -82,6 +87,16 @@ public class RequestWillBeSentExtraInfo {
     this.headers = headers;
   }
 
+  /** Connection timing information for the request. */
+  public ConnectTiming getConnectTiming() {
+    return connectTiming;
+  }
+
+  /** Connection timing information for the request. */
+  public void setConnectTiming(ConnectTiming connectTiming) {
+    this.connectTiming = connectTiming;
+  }
+
   /** The client security state set for the request. */
   public ClientSecurityState getClientSecurityState() {
     return clientSecurityState;
@@ -90,5 +105,19 @@ public class RequestWillBeSentExtraInfo {
   /** The client security state set for the request. */
   public void setClientSecurityState(ClientSecurityState clientSecurityState) {
     this.clientSecurityState = clientSecurityState;
+  }
+
+  /**
+   * Whether the site has partitioned cookies stored in a partition different than the current one.
+   */
+  public Boolean getSiteHasCookieInOtherPartition() {
+    return siteHasCookieInOtherPartition;
+  }
+
+  /**
+   * Whether the site has partitioned cookies stored in a partition different than the current one.
+   */
+  public void setSiteHasCookieInOtherPartition(Boolean siteHasCookieInOtherPartition) {
+    this.siteHasCookieInOtherPartition = siteHasCookieInOtherPartition;
   }
 }
